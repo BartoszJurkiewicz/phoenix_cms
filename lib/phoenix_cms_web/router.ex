@@ -1,26 +1,22 @@
 defmodule PhoenixCmsWeb.Router do
   use PhoenixCmsWeb, :router
 
-  pipeline :browser do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_flash
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
-  end
-
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   scope "/", PhoenixCmsWeb do
-    pipe_through :browser
+    pipe_through :api
 
-    get "/", PageController, :index
+    post "/login", SessionController, :sign_in
+    post "/logout", SessionController, :sign_out
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", PhoenixCmsWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", PhoenixCmsWeb do
+    pipe_through :api
+
+    resources "/users", UserController do
+      resources "/posts", PostController
+    end
+  end
 end

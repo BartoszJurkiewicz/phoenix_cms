@@ -66,6 +66,10 @@ config :phoenix, :stacktrace_depth, 20
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
 
+config :argon2_elixir,
+  t_cost: 2,
+  m_cost: 12
+
 # Configure your database
 config :phoenix_cms, PhoenixCms.Repo,
   username: "postgres",

@@ -33,6 +33,8 @@ defmodule PhoenixCms.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:comeonin, "~> 5.0"},
+      {:argon2_elixir, "~> 2.0"},
       {:phoenix, "~> 1.4.0"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_ecto, "~> 4.0"},
