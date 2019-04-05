@@ -38,10 +38,10 @@ defmodule PhoenixCmsWeb.PostController do
     # end
   end
 
-  # def show(conn, %{"id" => id}) do
-  #   post = Posts.get_post!(id)
-  #   render(conn, "show.json", post: post)
-  # end
+  def show(conn, %{"id" => id}) do
+    post = Posts.get_post!(id)
+    render(conn, "show.json", post: post)
+  end
 
   # def update(conn, %{"id" => id, "post" => post_params}) do
   #   post = Posts.get_post!(id)

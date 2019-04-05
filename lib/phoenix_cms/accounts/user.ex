@@ -9,6 +9,7 @@ defmodule PhoenixCms.Accounts.User do
     field :encrypted_password, :string
     field :name, :string
     field :password, :string, virtual: true
+    field :is_admin, :boolean, default: false
     has_many :posts, PhoenixCms.Posts.Post
 
     timestamps()

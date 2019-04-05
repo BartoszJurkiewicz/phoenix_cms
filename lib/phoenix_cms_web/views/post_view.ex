@@ -13,6 +13,8 @@ defmodule PhoenixCmsWeb.PostView do
   def render("post.json", %{post: post}) do
     %{id: post.id,
       content: post.content,
-      title: post.title}
+      title: post.title,
+      author_id: post.user_id 
+    }
   end
 end

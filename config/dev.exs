@@ -70,6 +70,11 @@ config :argon2_elixir,
   t_cost: 2,
   m_cost: 12
 
+config :cors_plug,
+  origin: ["http://localhost:8080"],
+  max_age: 86400,
+  methods: ["GET", "POST"]
+
 # Configure your database
 config :phoenix_cms, PhoenixCms.Repo,
   username: "postgres",

@@ -42,5 +42,6 @@ defmodule PhoenixCmsWeb.Endpoint do
     key: "_phoenix_cms_key",
     signing_salt: "EIAmGD0m"
 
+  plug CORSPlug
   plug PhoenixCmsWeb.Router
 end
