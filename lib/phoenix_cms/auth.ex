@@ -1,5 +1,4 @@
 defmodule PhoenixCms.Auth do
-  alias PhoenixCms.Repo
   alias PhoenixCms.Accounts
 
   def sign_in(%{"email" => email, "password" => password}) do
@@ -11,11 +10,7 @@ defmodule PhoenixCms.Auth do
         {:error, :invalid_credentials}
       
       user ->
-        if Argon2.check_pass(user, password) do
-          {:ok, user}
-        else
-          {:error, :invalid_credentials}
-        end
+        Argon2.check_pass(user, password)
     end
   end
 end

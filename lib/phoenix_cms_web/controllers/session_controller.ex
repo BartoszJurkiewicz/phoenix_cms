@@ -22,6 +22,8 @@ defmodule PhoenixCmsWeb.SessionController do
   end
 
   def sign_out(conn, _params) do
+    delete_csrf_token()
+
     conn
       |> fetch_session
       |> clear_session

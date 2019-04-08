@@ -2,8 +2,6 @@ defmodule PhoenixCms.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  import Comeonin.Argon2
-
   schema "users" do
     field :email, :string
     field :encrypted_password, :string

@@ -14,7 +14,7 @@ defmodule PhoenixCms.Accounts do
       |> Repo.preload(:posts)
   end
 
-  def get_user_by_email!(email), do: Repo.get_by(User, email: email)
+  def get_user_by_email!(email), do: Repo.get_by!(User, email: email)
 
   def create_user(attrs \\ %{}) do
     %User{}

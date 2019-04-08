@@ -22,7 +22,7 @@ defmodule PhoenixCms.Posts do
       |> IO.inspect
     post_changeset = Ecto.build_assoc(user, :posts, title: attrs["title"], content: attrs["content"])
 
-    # Repo.insert(post_changeset)
+    Repo.insert(post_changeset)
 
     # %Post{}
     #   |> Post.changeset(attrs)

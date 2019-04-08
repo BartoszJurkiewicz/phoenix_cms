@@ -4,24 +4,29 @@ defmodule PhoenixCmsWeb.Router do
   alias PhoenixCms.Accounts
 
   defp is_logged_in(conn, params) do
+    user_salt = System.get_env("USER_SALT")
     user_id = get_session(conn, "user_id")
+    user = Accounts.get_user!(user_id)
+    user_token = conn.req_cookies["token"]
+    is_admin = user.is_admin
 
-    case user_id do
-      nil ->
+    is_user_valid = user_id && Phoenix.Token.verify(conn, user_salt, user_token, max_age: 86400)
+
+    case is_user_valid do
+      {:error, _} ->
         conn
         |> put_status(403)
         |> json(%{error: "You have to be logged in."})
         |> halt
 
-      user_id ->
+      {:ok, user} ->
         conn
+        |> assign(:is_admin, is_admin)
     end
   end
 
   defp is_admin(conn, _params) do
-    user_id = get_session(conn, "user_id")
-    user = Accounts.get_user!(user_id)
-    is_admin = user.is_admin
+    is_admin = conn.assigns[:is_admin]
 
     case is_admin do
       false -> 
@@ -71,8 +76,8 @@ defmodule PhoenixCmsWeb.Router do
   scope "/admin", PhoenixCmsWeb do
     pipe_through [:browser, :logged, :admin]
 
-    resources "/users", UserController do
-      resources "/posts", PostController
+    resources "/users", UserController, except: [:index, :show] do
+      resources "/posts", PostController, except: [:index, :show]
     end
   end
 end
